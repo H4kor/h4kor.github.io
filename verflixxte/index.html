@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<!--
+	Strongly Typed by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>No Sidebar - Strongly Typed by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body class="no-sidebar">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div id="header" class="container">
+
+						<!-- Logo -->
+							<h1 id="logo"><a href="index.html">Unverflixxte Klixx</a></h1>
+							<p>Eine einfache Seite gegen falsche Klixx</p>
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main-wrapper">
+					<div id="main" class="container">
+						<div id="content"style="width: 50%; margin: 0 auto; ">
+							<div id="player" ></div>
+
+						    <script>
+						      // 2. This code loads the IFrame Player API code asynchronously.
+						      function findGetParameter(parameterName) {
+						          var result = null,
+						              tmp = [];
+						          location.search
+						          .substr(1)
+						              .split("&")
+						              .forEach(function (item) {
+						              tmp = item.split("=");
+						              if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+						          });
+						          return result;
+						      }
+
+						      function getParamter(url, parameterName) {
+						          var result = null,
+						              tmp = [];
+						          url.split("?")[1]
+						              .split("&")
+						              .forEach(function (item) {
+						              tmp = item.split("=");
+						              if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+						          });
+						          return result;
+						      }
+
+
+						      var getList = decodeURI(findGetParameter("list"));
+						      console.log(getList);
+						      var listID = getParamter( getList, "list");
+						      console.log(listID);
+
+						      var tag = document.createElement('script');
+
+						      tag.src = "https://www.youtube.com/iframe_api";
+						      var firstScriptTag = document.getElementsByTagName('script')[0];
+						      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+						      // 3. This function creates an <iframe> (and YouTube player)
+						      //    after the API code downloads.
+						      var player;
+						      function onYouTubeIframeAPIReady() {
+						        player = new YT.Player('player', {
+						          height: '360',
+						          width: '640',
+						          playerVars:
+						          {
+						            listType:'playlist',
+						            list: listID
+						          },
+						          events: {
+						            'onReady': onPlayerReady,
+						            'onStateChange': onPlayerStateChange
+						          }
+						        });
+						      }
+
+						      // 4. The API will call this function when the video player is ready.
+						      function onPlayerReady(event) {
+						        event.target.playVideo();
+						      }
+
+						      // 5. The API calls this function when the player's state changes.
+						      //    The function indicates that when playing a video (state=1),
+						      //    the player should play for six seconds and then stop.
+						      var done = false;
+						      function onPlayerStateChange(event) {
+						        if (event.data == YT.PlayerState.PLAYING && !done) {
+						          setTimeout(stopVideo, 6000);
+						          done = true;
+						        }
+						      }
+						      function stopVideo() {
+						        player.stopVideo();
+						      }
+						    </script>
+						</div>
+					</div>
+				</div>
+
+			<!-- Footer -->
+				<div id="footer-wrapper">
+					<div id="copyright" class="container">
+						<ul class="links">
+							<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/skel-viewport.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
